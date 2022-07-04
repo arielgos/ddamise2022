@@ -1,6 +1,7 @@
 let map, markers = null;
 let defaultLatitude = -17.3131921;
 let defaultLongitude = -65.8829336;
+let latitude, longitude = 0.0;
 
 /**
  * Firebase Realtime Database
@@ -12,7 +13,11 @@ const databaseReference = firebase.database().ref('users');
 
 // firebase listener/observer
 databaseReference.on('child_added', (snapshot) => {
-    console.log(snapshot.val().username);
+    let user = snapshot.val();
+    L.marker([user.latitude, user.longitude], {
+        title: user.username,
+        riseOnHover: true
+    }).addTo(markers);
 }, (error) => {
     console.error(error);
 });
@@ -28,8 +33,8 @@ $(function () {
         let newUser = databaseReference.push();
         newUser.set({
             username: name,
-            latitude: 0,
-            longitude: 0
+            latitude: latitude,
+            longitude: longitude
         }).then(function () {
             $('#login').hide();
         });
@@ -57,7 +62,16 @@ function init() {
 
     loading(false);
 
-    $('#login').show();
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(grabLocation);
+    }
+
 }
 
 
+function grabLocation(location) {
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+
+    $('#login').show();
+}
