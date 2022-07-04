@@ -2,10 +2,18 @@ let map, markers = null;
 let defaultLatitude = -17.3131921;
 let defaultLongitude = -65.8829336;
 
-jQuery(function () {
+$(function () {
     console.log("Web App Loaded...");
     init();
 })
+
+function loading(status) {
+    if (status) {
+        $('#loading').show();
+    } else {
+        $('#loading').hide();
+    }
+}
 
 function init() {
     map = L.map('map').setView([defaultLatitude, defaultLongitude], 8);
@@ -15,4 +23,6 @@ function init() {
     }).addTo(map);
 
     markers = L.layerGroup().addTo(map);
+
+    loading(false);
 }
