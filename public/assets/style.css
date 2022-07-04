@@ -8,6 +8,20 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+#loading {
+    background-color: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #FFF;
+    padding-top: 50vh;
+    font-size: 1.5em;
+}
+
 
 #map {
     position: fixed;
