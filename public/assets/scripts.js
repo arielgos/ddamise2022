@@ -2,9 +2,40 @@ let map, markers = null;
 let defaultLatitude = -17.3131921;
 let defaultLongitude = -65.8829336;
 
+/**
+ * Firebase Realtime Database
+ */
+const database = firebase.database();
+
+// database reference
+const databaseReference = firebase.database().ref('users');
+
+// firebase listener/observer
+databaseReference.on('child_added', (snapshot) => {
+    console.log(snapshot.val().username);
+}, (error) => {
+    console.error(error);
+});
+
 $(function () {
     console.log("Web App Loaded...");
+
     init();
+
+    $('form').submit(function (event) {
+        let name = $('form input#name').val();
+
+        let newUser = databaseReference.push();
+        newUser.set({
+            username: name,
+            latitude: 0,
+            longitude: 0
+        }).then(function () {
+            $('#login').hide();
+        });
+
+        event.preventDefault();
+    });
 })
 
 function loading(status) {
@@ -25,4 +56,8 @@ function init() {
     markers = L.layerGroup().addTo(map);
 
     loading(false);
+
+    $('#login').show();
 }
+
+
