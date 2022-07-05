@@ -63,6 +63,7 @@ function init() {
     loading(false);
 
     if (navigator.geolocation) {
+        console.log("Location Loaded...");
         navigator.geolocation.getCurrentPosition(grabLocation);
     }
 
