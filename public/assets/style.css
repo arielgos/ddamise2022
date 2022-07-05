@@ -45,6 +45,10 @@ body {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
 }
 
+#login form p {
+    color: #333;
+}
+
 #login input {
     font-size: 1.2em;
     margin-bottom: 20px;
