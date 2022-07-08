@@ -1,83 +1,83 @@
 var items = [
     {
         code: "C11253",
-        name: "Consultora 1",
+        name: "Cliente 1",
 		address: "Calle Caballero y Beni",
         distance: 0,
         point: {lat: -17.780051, lng: -63.181219}
     },
     {
         code: "C11262",
-        name: "Consultora 2",
+        name: "Cliente 2",
 		address: "Calle Mercado entre Isabel la Catolica y Av.Cañoto",
         distance: 0,
         point: {lat: -17.789572, lng: -63.188181}
     },
     {
         code: "C11255",
-        name: "Consultora 3",
+        name: "Cliente 3",
 		address: "Calle Rafael Peña y 24 de Septiembre",
         distance: 0,
         point: {lat: -17.777609, lng: -63.182088}
     },
     {
         code: "C11254",
-        name: "Consultora 4",
+        name: "Cliente 4",
 		address: "Calle Cuellar y Sara",
         distance: 0,
         point: {lat: -17.779734, lng: -63.187141}
     },
     {
         code: "C11260",
-        name: "Consultora 5",
+        name: "Cliente 5",
 		address: "Calle Corrdillera esquina Ingavi",
         distance: 0,
         point: {lat: -17.785026, lng: -63.186926}
     },
     {
         code: "C11280",
-        name: "Consultora 6",
+        name: "Cliente 6",
 		address: "Calle Atenas entre San Antonio y 16 de Julio",
         distance: 0,
         point: {lat: -17.826734, lng: -63.199669}
     },
     {
         code: "C11261",
-        name: "Consultora 7",
+        name: "Cliente 7",
 		address: "Calle España y Ayacucho",
         distance: 0,
         point: {lat: -17.783851, lng: -63.184909}
     },
     {
         code: "C11264",
-        name: "Consultora 8",
+        name: "Cliente 8",
         distance: 0,
         point: {lat: -17.793337, lng: -63.166361}
     },
     {
         code: "C11263",
-        name: "Consultora 9",
+        name: "Cliente 9",
 		address: "Av.Santa Cruz esquina Cap.Mariano Arrien",
         distance: 0,
         point: {lat: -17.794935, lng: -63.182538}
     },
     {
         code: "C11275",
-        name: "Consultora 10",
+        name: "Cliente 10",
 		address: "4to Anillo esquina Ave de Playa, Cambodromo",
         distance: 0,
         point: {lat: -17.755219, lng: -63.155707}
     },
     {
         code: "C11276",
-        name: "Consultora 11",
+        name: "Cliente 11",
 		address: "Av.Virgen de Cotoca, Pampa de la Isla",
         distance: 0,
         point: {lat: -17.770039, lng: -63.124803}
     },
     {
         code: "C11277",
-        name: "Consultora 12",
+        name: "Cliente 12",
 		address: "Colinas del Urubo, Urubo",
         distance: 0,
         point: {lat: -17.752018, lng: -63.218285}
