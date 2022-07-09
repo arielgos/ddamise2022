@@ -3,6 +3,14 @@ let defaultLatitude = -17.3131921;
 let defaultLongitude = -65.8829336;
 let latitude, longitude = 0.0;
 
+var config = {
+    authDomain: "ddamise2022.firebaseapp.com",
+    databaseURL: "https://ddamise2022-default-rtdb.firebaseio.com",
+    projectId: "ddamise2022"
+};
+
+firebase.initializeApp(config);
+
 /**
  * Firebase Realtime Database
  */
