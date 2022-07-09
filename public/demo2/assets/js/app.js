@@ -2,85 +2,85 @@ var items = [
     {
         code: "C11253",
         name: "Cliente 1",
-		address: "Calle Caballero y Beni",
+        address: "Calle Caballero y Beni",
         distance: 0,
-        point: {lat: -17.780051, lng: -63.181219}
+        point: { lat: -17.780051, lng: -63.181219 }
     },
     {
         code: "C11262",
         name: "Cliente 2",
-		address: "Calle Mercado entre Isabel la Catolica y Av.Cañoto",
+        address: "Calle Mercado entre Isabel la Catolica y Av.Cañoto",
         distance: 0,
-        point: {lat: -17.789572, lng: -63.188181}
+        point: { lat: -17.789572, lng: -63.188181 }
     },
     {
         code: "C11255",
         name: "Cliente 3",
-		address: "Calle Rafael Peña y 24 de Septiembre",
+        address: "Calle Rafael Peña y 24 de Septiembre",
         distance: 0,
-        point: {lat: -17.777609, lng: -63.182088}
+        point: { lat: -17.777609, lng: -63.182088 }
     },
     {
         code: "C11254",
         name: "Cliente 4",
-		address: "Calle Cuellar y Sara",
+        address: "Calle Cuellar y Sara",
         distance: 0,
-        point: {lat: -17.779734, lng: -63.187141}
+        point: { lat: -17.779734, lng: -63.187141 }
     },
     {
         code: "C11260",
         name: "Cliente 5",
-		address: "Calle Corrdillera esquina Ingavi",
+        address: "Calle Corrdillera esquina Ingavi",
         distance: 0,
-        point: {lat: -17.785026, lng: -63.186926}
+        point: { lat: -17.785026, lng: -63.186926 }
     },
     {
         code: "C11280",
         name: "Cliente 6",
-		address: "Calle Atenas entre San Antonio y 16 de Julio",
+        address: "Calle Atenas entre San Antonio y 16 de Julio",
         distance: 0,
-        point: {lat: -17.826734, lng: -63.199669}
+        point: { lat: -17.826734, lng: -63.199669 }
     },
     {
         code: "C11261",
         name: "Cliente 7",
-		address: "Calle España y Ayacucho",
+        address: "Calle España y Ayacucho",
         distance: 0,
-        point: {lat: -17.783851, lng: -63.184909}
+        point: { lat: -17.783851, lng: -63.184909 }
     },
     {
         code: "C11264",
         name: "Cliente 8",
         distance: 0,
-        point: {lat: -17.793337, lng: -63.166361}
+        point: { lat: -17.793337, lng: -63.166361 }
     },
     {
         code: "C11263",
         name: "Cliente 9",
-		address: "Av.Santa Cruz esquina Cap.Mariano Arrien",
+        address: "Av.Santa Cruz esquina Cap.Mariano Arrien",
         distance: 0,
-        point: {lat: -17.794935, lng: -63.182538}
+        point: { lat: -17.794935, lng: -63.182538 }
     },
     {
         code: "C11275",
         name: "Cliente 10",
-		address: "4to Anillo esquina Ave de Playa, Cambodromo",
+        address: "4to Anillo esquina Ave de Playa, Cambodromo",
         distance: 0,
-        point: {lat: -17.755219, lng: -63.155707}
+        point: { lat: -17.755219, lng: -63.155707 }
     },
     {
         code: "C11276",
         name: "Cliente 11",
-		address: "Av.Virgen de Cotoca, Pampa de la Isla",
+        address: "Av.Virgen de Cotoca, Pampa de la Isla",
         distance: 0,
-        point: {lat: -17.770039, lng: -63.124803}
+        point: { lat: -17.770039, lng: -63.124803 }
     },
     {
         code: "C11277",
         name: "Cliente 12",
-		address: "Colinas del Urubo, Urubo",
+        address: "Colinas del Urubo, Urubo",
         distance: 0,
-        point: {lat: -17.752018, lng: -63.218285}
+        point: { lat: -17.752018, lng: -63.218285 }
     }
 ];
 
@@ -90,9 +90,11 @@ var path = null;
 
 var paths = Array();
 
-var center = {lat: -17.783443, lng: -63.183526};
+var center = { lat: -17.783443, lng: -63.183526 };
 
 var map = null;
+
+var firstCircle = null;
 
 $(document).ready(function () {
     console.log("Start App");
@@ -105,6 +107,7 @@ $(document).ready(function () {
         loadItems();
         drawMarkers();
         event.preventDefault();
+
     });
 
     $("#print").click(function (event) {
@@ -124,9 +127,15 @@ function loadItems() {
     $(".items .list").html("");
 
     for (i = 0; i < items.length; i++) {
-        var li = $("<li>", {lat: items[i].point.lat, lng: items[i].point.lng, code: items[i].code, name: items[i].name, address: items[i].address});
-        var index = $("<div>", {class: "index"});
-        var div = $("<div>", {class: "text"});
+        var li = $("<li>", {
+            lat: items[i].point.lat,
+            lng: items[i].point.lng,
+            code: items[i].code,
+            name: items[i].name,
+            address: items[i].address
+        });
+        var index = $("<div>", { class: "index" });
+        var div = $("<div>", { class: "text" });
         index.html((i + 1).toString());
         li.append(index);
         div.html("[" + items[i].code + "] " + items[i].name);
@@ -158,7 +167,26 @@ function drawMarkers() {
             map: map
         });
         markers.push(marker);
-        paths.push({lat: parseFloat($(this).attr("lat")), lng: parseFloat($(this).attr("lng"))});
+        paths.push({ lat: parseFloat($(this).attr("lat")), lng: parseFloat($(this).attr("lng")) });
+    });
+
+    //limpiamos el circulo del mapa
+    if (firstCircle != null) {
+        firstCircle.setMap(null);
+    }
+
+    firstCircle = new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map: map,
+        center: {
+            lat: markers[0].position.lat(),
+            lng: markers[0].position.lng()
+        },
+        radius: 100
     });
 
     path = new google.maps.Polyline({
@@ -191,6 +219,17 @@ function loadMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: center
+    });
+
+    new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map: map,
+        center: center,
+        radius: 100
     });
 }
 
